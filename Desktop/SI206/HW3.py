@@ -52,8 +52,17 @@ class DigitalBookofAnswers():
     # ARGUMENTS:
     # self: the current object
     # RETURNS: None
-    def open_book(self):
-        pass
+    def open_book(self) :
+        while True :
+            turn_number = len(self.questions_asked_list) + 1
+            question = input(f"Turn {turn_number} - Please enter your question: ")
+
+            if question == "Done" :
+                print("Goodbye! See you soon.")
+                break
+
+            answer = self.check_get_answer(question)
+            print(answer)
     
     # Create the answer_log method
     # ARGUMENTS:
