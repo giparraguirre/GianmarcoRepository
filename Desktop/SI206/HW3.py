@@ -173,7 +173,22 @@ def test():
 # Extra Credit
 def my_test():
     # Put your test code here
-    pass
+    print("Testing correct output from answer_log when no questions have been asked")
+    answers_list = ['Stay Positive', 'Go For It', 'Enjoy It']
+    book = DigitalBookofAnswers(answers_list)
+
+    expected = []
+    actual = book.answer_log()
+    print(f"Expected : {expected}, Actual : {actual}")
+    print(" ")
+
+    print("Testing correct behavior from answer_log when answers_list and answered_list")
+    book.answered_list = [2, 1, 2]
+
+    expected = ['2 - enjoy it', '1 - go for it']
+    actual = book.answer_log()
+    print(f"Expected : {expected}, Actual : {actual}")
+    print(" ")
 
 def main() :
     answer_list = [
@@ -194,6 +209,6 @@ def main() :
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    main()
+    # main()
     # test()
-    # my_test() #TODO: Uncomment if you do the extra credit
+    my_test() #TODO: Uncomment if you do the extra credit
