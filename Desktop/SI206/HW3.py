@@ -194,6 +194,6 @@ def main() :
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    # main()
-    test()
+    main()
+    # test()
     # my_test() #TODO: Uncomment if you do the extra credit
