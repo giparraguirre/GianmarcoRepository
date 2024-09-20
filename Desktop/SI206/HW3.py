@@ -41,6 +41,13 @@ class DigitalBookofAnswers():
             answer = self.book_answered_list[self.answered_list[index]]
             return f"I've already answered this question. The answer is: {answer}"
         
+        answer_index = random.randint(0, len(self.book_answer_list) - 1)
+        answer = self.book_answer_list[answer_index]
+        self.answered_list.append(answer)
+        self.questions_asked_list.append(question)
+
+        return answer
+        
     # Creates open_book method
     # ARGUMENTS:
     # self: the current object
