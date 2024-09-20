@@ -38,12 +38,12 @@ class DigitalBookofAnswers():
     def check_get_answer(self, question) :
         if question in self.questions_asked_list :
             index = self.questions_asked_list.index(question)
-            answer = self.book_answered_list[self.answered_list[index]]
+            answer = self.book_answer_list[self.answered_list[index]]
             return f"I've already answered this question. The answer is: {answer}"
         
         answer_index = random.randint(0, len(self.book_answer_list) - 1)
         answer = self.book_answer_list[answer_index]
-        self.answered_list.append(answer)
+        self.answered_list.append(answer_index)
         self.questions_asked_list.append(question)
 
         return answer
@@ -69,7 +69,25 @@ class DigitalBookofAnswers():
     # self: the current object
     # RETURNS: a list
     def answer_log(self):
-        pass
+        if not self.answered_list :
+            print("Empty")
+            print([])
+            return []
+        
+        frequency  = {}
+        for num in self.answered_list : 
+            answer = self.book_answer_list[num].lower()
+
+            if answer in frequency : 
+                frequency[answer] += 1
+            else :
+                frequency[answer] = 1
+
+        the_answer_log_list = [f"{number_of_times} - {answer}" for answer, number_of_times in frequency.items()]
+
+        the_answer_log_list.sort(key=lambda x: int(x.split(' - ')[0]), reverse=True)
+
+        return the_answer_log_list
     
 
 def test():
@@ -157,11 +175,25 @@ def my_test():
     # Put your test code here
     pass
 
-def main():
-    pass
+def main() :
+    answer_list = [
+        'Follow Your Inner Voice',
+        'Stay Positive', 
+        'Go For It',
+        'Believe in Yourself',
+        'Stay Open to the Future',
+        'Enjoy it'
+    ]
+
+    book = DigitalBookofAnswers(answer_list)
+
+    book.open_book()
+
+    for entry in book.answer_log() :
+        print(entry)
 
 # Only run the main function if this file is being run (not imported)
 if __name__ == "__main__":
-    # main()
-    test()
+    main()
+    # test()
     # my_test() #TODO: Uncomment if you do the extra credit
