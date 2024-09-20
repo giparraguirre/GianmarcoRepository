@@ -1,10 +1,15 @@
-# Your name:
-# Your student id:
-# Your email:
-# Who or what you worked with on this homework (including generative AI like ChatGPT):
+# Your name: Gianmarco Iparraguirre
+# Your student id: 6361 1583
+# Your email: gianmarc@umich.edu
+# Who or what you worked with on this homework (including generative AI like ChatGPT): Worked with ChatGPT
 # If you worked with generative AI also add a statement for how you used it.
 # e.g.:
 # Asked Chatgpt hints for debugging and suggesting the general structure of the code
+
+# Asked Chatgpt if I used /or how to use functions calls properly. Additionally, I asked ChatGPT for an overview
+# of what function call to use from the import random. I also asked how to sort a list in descending order. 
+# Finally, I asked chat for reassurace on the my_tests() and how to exactly structure the output check_get_answer()
+# test.  
 
 import random
 
@@ -36,13 +41,15 @@ class DigitalBookofAnswers():
     # question: the question the user wants to ask the digital book of answers
     # RETURNS: a string
     def check_get_answer(self, question) :
-        if question in self.questions_asked_list :
+        if question in self.questions_asked_list:
             index = self.questions_asked_list.index(question)
-            answer = self.book_answer_list[self.answered_list[index]]
+            answer_index = self.answered_list[index]
+            answer = self.book_answer_list[answer_index]
             return f"I've already answered this question. The answer is: {answer}"
         
         answer_index = random.randint(0, len(self.book_answer_list) - 1)
         answer = self.book_answer_list[answer_index]
+    
         self.answered_list.append(answer_index)
         self.questions_asked_list.append(question)
 
@@ -188,6 +195,22 @@ def my_test():
     expected = ['2 - enjoy it', '1 - go for it']
     actual = book.answer_log()
     print(f"Expected : {expected}, Actual : {actual}")
+    print(" ")
+
+    print("Testing correct prompt from open_book")
+    expected = "Turn 1 - Please enter your question: "
+    actual = f"Turn {len(book.questions_asked_list) + 1} - Please enter your question: "
+    print(f"Expected : {expected}, Actual : {actual}")
+    print(" ")
+
+    print("Testing check_get_answer when the same question is asked twice")
+    first_answer = book.check_get_answer('test question 2')
+    expected_first_answer = first_answer  # Store the random answer provided the first time
+    print(f"First time asking: Expected: Random answer, Actual: {first_answer}")
+    
+    second_answer = book.check_get_answer('test question 2')
+    expected_second_answer = f"I've already answered this question. The answer is: {expected_first_answer}"
+    print(f"Second time asking: Expected: {expected_second_answer}, Actual: {second_answer}")
     print(" ")
 
 def main() :
